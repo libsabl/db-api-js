@@ -14,10 +14,8 @@ This implementation builds on the following generic packages which describe conn
 |-|-|
 |[`@sabl/storage-pool`](https://npmjs.org/package/@sabl/storage-pool)|[storage pool](https://github.com/libsabl/patterns/blob/main/patterns/storage-pool.md)|
 |[`@sabl/txn`](https://npmjs.org/package/@sabl/txn)|[txn](https://github.com/libsabl/patterns/blob/main/patterns/txn.md)|
-  
-<!--
-For more detail on the db api pattern, see sabl / [patterns](https://github.com/libsabl/patterns#patterns) / [db-api](https://github.com/libsabl/patterns/blob/main/patterns/db-api.md).
--->
+   
+For more detail on the db api pattern, see sabl / [patterns](https://github.com/libsabl/patterns#patterns) / [db-api](https://github.com/libsabl/patterns/blob/main/patterns/db-api.md). 
 
 <!-- BEGIN:REMOVE_FOR_NPM -->
 > [**sabl**](https://github.com/libsabl/patterns) is an open-source project to identify, describe, and implement effective software patterns which solve small problems clearly, can be composed to solve big problems, and which work consistently across many programming languages.
