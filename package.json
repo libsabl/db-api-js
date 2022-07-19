@@ -1,6 +1,6 @@
 {
   "name": "@sabl/db-api",
-  "version": "0.1.0-a01",
+  "version": "0.1.0",
   "description": "A uniform and context-aware interface for relation databases",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
