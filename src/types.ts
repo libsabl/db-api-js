@@ -2,6 +2,10 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { DbPoolBase } from './dbpool-base';
+
+// Type-only imports:
 import type { IContext } from '@sabl/context';
 import type { Transactable, Txn } from '@sabl/txn';
 import type {
@@ -10,8 +14,9 @@ import type {
   StoragePool,
   StorageConn,
 } from '@sabl/storage-pool';
-
 import type { Row } from './row';
+import type { AsyncFactory, PoolOptions } from '@sabl/async';
+import type { DriverConn } from './driver';
 
 export type ParamValue = unknown;
 
@@ -161,10 +166,14 @@ export type DbTransactable = Transactable<DbTxn>;
 /**
  * An open database connection that implements
  * both {@link DbApi} and {@link DbTransactable}.
- * Structurally matches and can be used as a {@link StorageConn}
+ * Structurally matches and can be used as a `StorageConn`
  */
 export interface DbConn extends DbApi, DbTransactable {
-  /** Return the connection to its source pool */
+  /**
+   * Prevent any further operations on the connection.
+   * Returns the connection to its source pool when
+   * all operations have completed.
+   */
   close(): Promise<void>;
 }
 
@@ -189,6 +198,13 @@ export interface DbPool extends DbApi, DbTransactable {
   close(): Promise<void>;
 }
 
+export class DbPool {
+  /** Create an instance of a default pool implementation ({@link DbPoolBase}) */
+  static create(factory: AsyncFactory<DriverConn>, opts?: PoolOptions): DbPool {
+    return new DbPoolBase(factory, opts);
+  }
+}
+
 // Structural interface assertions
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _pool: StoragePool = <DbPool>(<unknown>null);
@@ -198,3 +214,15 @@ const _conn: StorageConn = <DbConn>(<unknown>null);
 const _txn1: StorageTxn = <DbTxn>(<unknown>null);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _txn2: Txn = <DbTxn>(<unknown>null);
+
+/** An {@link EventEmitter} that supports a `'complete'` event */
+export interface CompleteEmitter<T> {
+  /**
+   * Schedule a callback to be run when the
+   * transaction has completed all operations
+   */
+  on(type: 'complete', fn: (item: T) => any | Promise<any>): void;
+
+  /** Remove a scheduled 'complete' callback */
+  off(type: 'complete', fn: (item: T) => any | Promise<any>): void;
+}

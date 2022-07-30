@@ -16,6 +16,7 @@
     "onStartup": ["all-tests"]
   },
   "cSpell.words": [
-    "Initter"
+    "Initter",
+    "Inspectable"
   ]
 }

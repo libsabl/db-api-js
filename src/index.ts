@@ -4,5 +4,7 @@
 
 export * from './row';
 export * from './types';
-export { DbConnBase } from './dbconn-base';
-export { DbTxnBase } from './dbtxn-base';
+export * from './driver';
+export { QueueConn } from './queue-conn';
+export { SqlTxn, SqlTxnConfig } from './sql-txn';
+export { DbPoolBase } from './dbpool-base';
