@@ -28,7 +28,6 @@ describe('toParamArray', () => {
   });
 
   it('returns empty array for null input', () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     expect(toParamArray(null!)).toEqual([]);
   });
 });
