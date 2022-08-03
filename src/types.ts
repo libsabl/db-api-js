@@ -2,6 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
+// Type-only imports:
 import type { IContext } from '@sabl/context';
 import type { Transactable, Txn } from '@sabl/txn';
 import type {
@@ -10,7 +11,6 @@ import type {
   StoragePool,
   StorageConn,
 } from '@sabl/storage-pool';
-
 import type { Row } from './row';
 
 export type ParamValue = unknown;
@@ -161,10 +161,14 @@ export type DbTransactable = Transactable<DbTxn>;
 /**
  * An open database connection that implements
  * both {@link DbApi} and {@link DbTransactable}.
- * Structurally matches and can be used as a {@link StorageConn}
+ * Structurally matches and can be used as a `StorageConn`
  */
 export interface DbConn extends DbApi, DbTransactable {
-  /** Return the connection to its source pool */
+  /**
+   * Prevent any further operations on the connection.
+   * Returns the connection to its source pool when
+   * all operations have completed.
+   */
   close(): Promise<void>;
 }
 

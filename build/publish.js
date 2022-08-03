@@ -38,7 +38,7 @@ function removeChunk(source, label) {
 
 async function addReadmeHeaders(source, pkgv) {
   const commit = await gitGetCommit();
-  const codeCovImg = `https://codecov.io/gh/libsabl/db-api-js/commit/${commit}/graph/badge.svg?token=TVL1XYSJHA`;
+  const codeCovImg = `https://codecov.io/gh/libsabl/db-api-js/commit/${commit}/graph/badge.svg?token=Il5Qqcc3M0`;
   const codeCovPage = `https://codecov.io/gh/libsabl/db-api-js/tree/${commit}/src`;
   const ghBrowse = `https://github.com/libsabl/db-api-js/tree/${commit}`;
   let docsPath = `https://github.com/libsabl/db-api-js/blob/${commit}/docs/DOCS.md`;
@@ -136,7 +136,7 @@ async function validateVersion(pkgv) {
   // Render tsconfig
   console.log(chalk.cyanBright('  Rendering tsconfig.json'));
   const { stdout: tsconfig } = await exec(
-    'pnpx tsc --project ./tsconfig.build.json --showConfig ',
+    'npx tsc --project ./tsconfig.build.json --showConfig ',
     { cwd: pkgpath.root }
   );
   await fs.writeFile(pubpath('tsconfig.json'), tsconfig, 'utf8');
